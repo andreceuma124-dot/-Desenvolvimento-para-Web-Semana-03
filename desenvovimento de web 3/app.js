@@ -1,310 +1,189 @@
-// =====================================================
+// ==========================================
 // BLOCO 1 - FUNDAMENTOS E VARIÁVEIS
-// =====================================================
+// ==========================================
 
-// 1. Variável pontos
+console.log("--- BLOCO 1 ---");
 
-let pontos = 20;
+// 1. Declaração de let pontos com valor inicial, adição de 10 e exibição
+let pontos = 50;
+pontos += 10;
+console.log("Pontos:", pontos); // 60
 
-pontos = pontos + 10;
-
-console.log("Pontos:", pontos);
-
-
-// 2. Constante MAX_PONTOS
-
+// 2. Declaração de MAX_PONTOS e demonstração do TypeError ao reatribuir
 const MAX_PONTOS = 100;
-
-console.log("Máximo de pontos:", MAX_PONTOS);
-
-// Tentativa de reatribuição da constante
 try {
-    MAX_PONTOS = 200;
+  MAX_PONTOS = 200; // Gera erro
 } catch (erro) {
-    console.log("Erro ao alterar MAX_PONTOS:", erro.name);
-    console.log("Motivo: uma constante não pode ser reatribuída.");
+  console.log("Erro ao reatribuir const:", erro.message);
+  // Explicação: Variáveis declaradas com 'const' são de atribuição única.
+  // Elas criam uma referência constante que não pode ser reatribuída.
 }
 
+// 3. Tipos primitivos e operador typeof
+let texto = "Olá, JavaScript!"; // string
+let numero = 42;                 // number
+let booleano = true;             // boolean
+let indefinido;                  // undefined
+let nulo = null;                 // null
 
-// 3. Tipos primitivos
+console.log("Tipo de texto:", typeof texto);           // string
+console.log("Tipo de numero:", typeof numero);         // number
+console.log("Tipo de booleano:", typeof booleano);     // boolean
+console.log("Tipo de indefinido:", typeof indefinido); // undefined
+console.log("Tipo de nulo:", typeof nulo);             // object (comportamento histórico do JS)
 
-let nome = "André";
-let idade = 20;
-let aprovado = true;
-let curso;
-let valor = null;
+// 4. Template Literals vs Concatenação
+let nome = "Maria";
+let idade = 25;
 
-console.log("Tipo de nome:", typeof nome);
-console.log("Tipo de idade:", typeof idade);
-console.log("Tipo de aprovado:", typeof aprovado);
-console.log("Tipo de curso:", typeof curso);
-console.log("Tipo de valor:", typeof valor);
+// Com Template Literals
+let fraseTemplate = `Olá, meu nome é ${nome} e tenho ${idade} anos.`;
 
-
-// 4. Template Literals
-
-let aluno = "André";
-let nota = 8;
-
-let fraseTemplate = `O aluno ${aluno} tirou a nota ${nota}.`;
+// Com Concatenação
+let fraseConcatenacao = "Olá, meu nome é " + nome + " e tenho " + idade + " anos.";
 
 console.log("Template Literal:", fraseTemplate);
+console.log("Concatenação:", fraseConcatenacao);
 
 
-// Mesma frase usando concatenação
-
-let fraseConcatenada =
-    "O aluno " + aluno + " tirou a nota " + nota + ".";
-
-console.log("Concatenação:", fraseConcatenada);
-
-
-// =====================================================
+// ==========================================
 // BLOCO 2 - FUNÇÕES
-// =====================================================
+// ==========================================
 
+console.log("\n--- BLOCO 2 ---");
 
-// 1. Função declarada - Hoisting
-
-console.log(
-    "Maior de idade:",
-    ehMaiorDeIdade(20)
-);
+// 1. Função declarada (com Hoisting)
+// Chamando antes da declaração para demonstrar que o Hoisting funciona
+console.log("ehMaiorDeIdade (18):", ehMaiorDeIdade(18)); // true
 
 function ehMaiorDeIdade(idade) {
-    return idade >= 18;
+  return idade >= 18;
 }
 
-
-// 2. Função de expressão
-
-// Tentativa de chamar antes da declaração
+// 2. Função de expressão (com ReferenceError)
 try {
-    console.log(
-        ehMaiorDeIdadeExpressao(20)
-    );
+  // Tentando chamar antes de declarar
+  console.log(ehMaiorDeIdadeExpressao(18));
 } catch (erro) {
-    console.log(
-        "Erro na função de expressão:",
-        erro.name
-    );
+  console.log("Erro ao chamar expressão antes de declarar:", erro.message);
+  // Explicação: Expressões de função atribuídas a 'const' ou 'let' ficam na Temporal Dead Zone (TDZ)
+  // e não podem ser acessadas antes da sua inicialização no código.
 }
 
-const ehMaiorDeIdadeExpressao = function (idade) {
-    return idade >= 18;
+const ehMaiorDeIdadeExpressao = function(idade) {
+  return idade >= 18;
 };
 
-console.log(
-    "Função de expressão:",
-    ehMaiorDeIdadeExpressao(20)
-);
-
-
-// 3. Função dobro - declarada
-
-function dobroDeclarada(numero) {
-    return numero * 2;
+// 3. Função dobro nas três formas
+// Forma 1: Declarada
+function dobroDeclarada(n) {
+  return n * 2;
 }
 
-console.log(
-    "Dobro declarada:",
-    dobroDeclarada(5)
-);
-
-
-// Função dobro - expressão
-
-const dobroExpressao = function (numero) {
-    return numero * 2;
+// Forma 2: Expressão
+const dobroExpressao = function(n) {
+  return n * 2;
 };
 
-console.log(
-    "Dobro expressão:",
-    dobroExpressao(5)
-);
+// Forma 3: Arrow function (forma curta)
+const dobroArrow = n => n * 2;
+
+console.log("Dobro (declarada):", dobroDeclarada(5)); // 10
+console.log("Dobro (expressão):", dobroExpressao(5)); // 10
+console.log("Dobro (arrow):", dobroArrow(5));         // 10
+
+// 4. Variação com parâmetro padrão (ex: n = 1)
+const dobroComPadrao = (n = 1) => n * 2;
+
+console.log("Dobro com argumento (7):", dobroComPadrao(7));     // 14
+console.log("Dobro sem argumento (padrão):", dobroComPadrao()); // 2 (usa n = 1)
 
 
-// Função dobro - Arrow Function
-
-const dobroArrow = (numero) => numero * 2;
-
-console.log(
-    "Dobro arrow:",
-    dobroArrow(5)
-);
-
-
-// 4. Função com parâmetro padrão
-
-function dobroPadrao(n = 1) {
-    return n * 2;
-}
-
-console.log(
-    "Dobro com parâmetro padrão:",
-    dobroPadrao()
-);
-
-
-// =====================================================
+// ==========================================
 // BLOCO 3 - CONTROLE DE FLUXO
-// =====================================================
+// ==========================================
 
+console.log("\n--- BLOCO 3 ---");
 
-// 1. Classificar nota
-
+// 1. Classificação de nota com if/else
 function classificarNota(nota) {
+  if (nota >= 6) {
+    return "Aprovado";
+  } else {
+    return "Reprovado";
+  }
+}
+console.log("Nota 7.5:", classificarNota(7.5)); // Aprovado
+console.log("Nota 4.0:", classificarNota(4.0)); // Reprovado
 
-    if (nota >= 6) {
-        return "Aprovado";
-    } else {
-        return "Reprovado";
-    }
+// 2. Estrutura switch para semáforo
+let corSemaforo = "Amarelo";
+
+switch (corSemaforo.toLowerCase()) {
+  case "vermelho":
+    console.log("Pare");
+    break;
+  case "amarelo":
+    console.log("Atenção");
+    break;
+  case "verde":
+    console.log("Siga");
+    break;
+  default:
+    console.log("Cor inválida");
 }
 
-console.log(
-    "Nota 8:",
-    classificarNota(8)
-);
-
-console.log(
-    "Nota 5:",
-    classificarNota(5)
-);
-
-
-// 2. Switch - Semáforo
-
-let corSemaforo = "amarelo";
-
-switch (corSemaforo) {
-
-    case "vermelho":
-        console.log("Pare");
-        break;
-
-    case "amarelo":
-        console.log("Atenção");
-        break;
-
-    case "verde":
-        console.log("Siga");
-        break;
-
-    default:
-        console.log("Cor inválida");
-}
-
-
-// 3. Tabuada do 5 usando FOR
-
-console.log("----- TABUADA DO 5 -----");
-
+// 3. Tabuada do 5 utilizando laço for
+console.log("Tabuada do 5:");
 for (let i = 1; i <= 10; i++) {
-
-    console.log(
-        `5 x ${i} = ${5 * i}`
-    );
+  console.log(`5 x ${i} = ${5 * i}`);
 }
 
-
-// 4. Contagem regressiva usando WHILE
-
-console.log("----- CONTAGEM REGRESSIVA -----");
-
+// 4. Contagem regressiva de 5 até 1 usando while
+console.log("Contagem regressiva:");
 let contador = 5;
-
 while (contador >= 1) {
-
-    console.log(contador);
-
-    contador--;
+  console.log(contador);
+  contador--;
 }
 
-
-// 5. Números de 1 a 20 usando FOR
-
-console.log("----- PAR OU ÍMPAR - FOR -----");
-
+// 5. Números de 1 a 20 ("par" ou "ímpar") com for e while
+console.log("Par ou Ímpar (com for):");
 for (let i = 1; i <= 20; i++) {
-
-    if (i % 2 === 0) {
-        console.log(`${i} é par`);
-    } else {
-        console.log(`${i} é ímpar`);
-    }
+  let tipo = (i % 2 === 0) ? "par" : "ímpar";
+  console.log(`${i} é ${tipo}`);
 }
 
-
-// 6. Números de 1 a 20 usando WHILE
-
-console.log("----- PAR OU ÍMPAR - WHILE -----");
-
-let numero = 1;
-
-while (numero <= 20) {
-
-    if (numero % 2 === 0) {
-        console.log(`${numero} é par`);
-    } else {
-        console.log(`${numero} é ímpar`);
-    }
-
-    numero++;
+console.log("Par ou Ímpar (com while):");
+let j = 1;
+while (j <= 20) {
+  let tipo = (j % 2 === 0) ? "par" : "ímpar";
+  console.log(`${j} é ${tipo}`);
+  j++;
 }
 
-
-// 7. Dia da semana usando SWITCH
-
+// 6. Função diaDaSemana com switch e default
 function diaDaSemana(numero) {
-
-    switch (numero) {
-
-        case 1:
-            return "Domingo";
-
-        case 2:
-            return "Segunda-feira";
-
-        case 3:
-            return "Terça-feira";
-
-        case 4:
-            return "Quarta-feira";
-
-        case 5:
-            return "Quinta-feira";
-
-        case 6:
-            return "Sexta-feira";
-
-        case 7:
-            return "Sábado";
-
-        default:
-            return "Número inválido";
-    }
+  switch (numero) {
+    case 1:
+      return "Domingo";
+    case 2:
+      return "Segunda-feira";
+    case 3:
+      return "Terça-feira";
+    case 4:
+      return "Quarta-feira";
+    case 5:
+      return "Quinta-feira";
+    case 6:
+      return "Sexta-feira";
+    case 7:
+      return "Sábado";
+    default:
+      return "Número inválido. Digite um número de 1 a 7.";
+  }
 }
 
-
-// Testando a função
-
-console.log(
-    "Dia 1:",
-    diaDaSemana(1)
-);
-
-console.log(
-    "Dia 5:",
-    diaDaSemana(5)
-);
-
-console.log(
-    "Dia 7:",
-    diaDaSemana(7)
-);
-
-console.log(
-    "Dia 8:",
-    diaDaSemana(8)
-);
+console.log("Dia 1:", diaDaSemana(1));   // Domingo
+console.log("Dia 5:", diaDaSemana(5));   // Quinta-feira
+console.log("Dia 9:", diaDaSemana(9));   // Número inválido

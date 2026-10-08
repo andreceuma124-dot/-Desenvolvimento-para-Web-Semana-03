@@ -3,6 +3,7 @@
 // =====================================================
 
 // 1. Variável pontos
+
 let pontos = 20;
 
 pontos = pontos + 10;
@@ -11,12 +12,12 @@ console.log("Pontos:", pontos);
 
 
 // 2. Constante MAX_PONTOS
+
 const MAX_PONTOS = 100;
 
 console.log("Máximo de pontos:", MAX_PONTOS);
 
-// Tentativa de alterar uma constante.
-// O try/catch permite mostrar o erro sem parar o programa.
+// Tentativa de reatribuição da constante
 try {
     MAX_PONTOS = 200;
 } catch (erro) {
@@ -27,11 +28,11 @@ try {
 
 // 3. Tipos primitivos
 
-let nome = "Andre";       // string
-let idade = 20;           // number
-let aprovado = true;      // boolean
-let curso;                // undefined
-let valor = null;         // null
+let nome = "André";
+let idade = 20;
+let aprovado = true;
+let curso;
+let valor = null;
 
 console.log("Tipo de nome:", typeof nome);
 console.log("Tipo de idade:", typeof idade);
@@ -42,7 +43,7 @@ console.log("Tipo de valor:", typeof valor);
 
 // 4. Template Literals
 
-let aluno = "Andre";
+let aluno = "André";
 let nota = 8;
 
 let fraseTemplate = `O aluno ${aluno} tirou a nota ${nota}.`;
@@ -50,7 +51,7 @@ let fraseTemplate = `O aluno ${aluno} tirou a nota ${nota}.`;
 console.log("Template Literal:", fraseTemplate);
 
 
-// Mesma frase usando concatenação com +
+// Mesma frase usando concatenação
 
 let fraseConcatenada =
     "O aluno " + aluno + " tirou a nota " + nota + ".";
@@ -63,10 +64,12 @@ console.log("Concatenação:", fraseConcatenada);
 // =====================================================
 
 
-// 1. Função declarada e HOISTING
+// 1. Função declarada - Hoisting
 
-// A função pode ser chamada antes de ser declarada.
-console.log("Maior de idade:", ehMaiorDeIdade(20));
+console.log(
+    "Maior de idade:",
+    ehMaiorDeIdade(20)
+);
 
 function ehMaiorDeIdade(idade) {
     return idade >= 18;
@@ -75,12 +78,16 @@ function ehMaiorDeIdade(idade) {
 
 // 2. Função de expressão
 
-// Tentativa de chamar antes da declaração.
-// Isso gera ReferenceError.
+// Tentativa de chamar antes da declaração
 try {
-    console.log(ehMaiorDeIdadeExpressao(20));
+    console.log(
+        ehMaiorDeIdadeExpressao(20)
+    );
 } catch (erro) {
-    console.log("Erro na função de expressão:", erro.name);
+    console.log(
+        "Erro na função de expressão:",
+        erro.name
+    );
 }
 
 const ehMaiorDeIdadeExpressao = function (idade) {
@@ -133,7 +140,6 @@ function dobroPadrao(n = 1) {
     return n * 2;
 }
 
-// Chamando sem passar argumento
 console.log(
     "Dobro com parâmetro padrão:",
     dobroPadrao()
@@ -156,8 +162,15 @@ function classificarNota(nota) {
     }
 }
 
-console.log("Nota 8:", classificarNota(8));
-console.log("Nota 5:", classificarNota(5));
+console.log(
+    "Nota 8:",
+    classificarNota(8)
+);
+
+console.log(
+    "Nota 5:",
+    classificarNota(5)
+);
 
 
 // 2. Switch - Semáforo
@@ -189,8 +202,9 @@ console.log("----- TABUADA DO 5 -----");
 
 for (let i = 1; i <= 10; i++) {
 
-    console.log(`5 x ${i} = ${5 * i}`);
-
+    console.log(
+        `5 x ${i} = ${5 * i}`
+    );
 }
 
 
@@ -219,7 +233,6 @@ for (let i = 1; i <= 20; i++) {
     } else {
         console.log(`${i} é ímpar`);
     }
-
 }
 
 
@@ -275,7 +288,23 @@ function diaDaSemana(numero) {
 
 
 // Testando a função
-console.log("Dia 1:", diaDaSemana(1));
-console.log("Dia 5:", diaDaSemana(5));
-console.log("Dia 7:", diaDaSemana(7));
-console.log("Dia 8:", diaDaSemana(8));
+
+console.log(
+    "Dia 1:",
+    diaDaSemana(1)
+);
+
+console.log(
+    "Dia 5:",
+    diaDaSemana(5)
+);
+
+console.log(
+    "Dia 7:",
+    diaDaSemana(7)
+);
+
+console.log(
+    "Dia 8:",
+    diaDaSemana(8)
+);
